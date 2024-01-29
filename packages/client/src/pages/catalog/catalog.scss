@@ -1,0 +1,7 @@
+.catalog_div_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 350px);
+    grid-template-rows: auto;
+    justify-items: center;
+    margin: 20px;
+}
