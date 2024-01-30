@@ -1,12 +1,25 @@
-import { configureStore } from "@reduxjs/toolkit";
-import productSlices from "./productSlices";
+import { configureStore } from '@reduxjs/toolkit'
+import productReducer, {initialState} from './slices/productSlices'
+import {ProductDataSlice} from  './slices/type'
 
-const store = configureStore({
+
+export type initialStoreType = {
+  product: ProductDataSlice
+}
+
+export const initialStore: initialStoreType = {
+  product: initialState,
+}
+
+const createStore = (preloadedState = initialStore) => {
+  return configureStore({
+    preloadedState,
     reducer: {
-        product: productSlices
-    }
-})
+        product: productReducer,
+    },
+  })
+}
 
-export default store;
+export const store = createStore()
 
-
+export default createStore
