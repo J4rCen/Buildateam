@@ -15,7 +15,7 @@ const createStore = (preloadedState = initialStore) => {
   return configureStore({
     preloadedState,
     reducer: {
-        product: productReducer,
+      product: productReducer,
     },
   })
 }

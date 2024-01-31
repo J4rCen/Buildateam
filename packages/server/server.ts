@@ -26,6 +26,11 @@ async function startServer() {
 
   const server = express()
   const PORT = 3001
+  const initialState = {
+    product: {
+      productData: []
+    }
+  }
   
   if(isDev()) {
     const {createServer: createServerVite} = await import('vite')
@@ -54,11 +59,15 @@ async function startServer() {
         ssrManifest?: string
       ) => Promise<string>
 
-      const initialState = []
-      const data = await shopifyDBControllers.getData()
-      data.map(el => {
-        initialState.push(el.dataValues.data)
-      })
+     
+      if(initialState.product.productData.length === 0) {
+        const data = await shopifyDBControllers.getData()
+        data.map(el => {
+          initialState.product.productData.push(el.data)
+        }) 
+      }
+
+      
 
       if(isProduction()) {
         template = await fs.readFile(path.join(distPath, 'index.html'), 'utf-8')
@@ -79,9 +88,9 @@ async function startServer() {
 
       const rendered = await render(initialState, ssrManifest)
 
-      const ssrData = `<script>window.__PRELOADED_STATE__={product: {productData: ${JSON.stringify(
+      const ssrData = `<script>window.__PRELOADED_STATE__=${JSON.stringify(
         initialState
-      )}}}</script>`
+      )}</script>`
 
       const html = template.replace('<!--ssr-outlet-->', rendered).replace('<!--ssr-data-->', ssrData)
 

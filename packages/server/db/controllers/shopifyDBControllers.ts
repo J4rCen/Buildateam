@@ -1,7 +1,7 @@
 import shopifyData from "../models/shopyfiData.model"
 
 class shopifyDBControllers {
-    setData = (data: object) => {
+    setData = (data: any) => {
         try {
 
             return shopifyData.create({data})
@@ -11,10 +11,10 @@ class shopifyDBControllers {
         }
     }
 
-    getData = () => {
+    getData = async () => {
         try {
 
-            return shopifyData.findAll()
+            return await shopifyData.findAll({raw: true, attributes: ['data']})
             
         } catch (error) {
             console.error(error)

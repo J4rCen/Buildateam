@@ -10,6 +10,7 @@ export interface ICatalog extends IProductCard{
 const Catalog = () => {
 
     const product: Array<React.ReactNode> = []
+    
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const data = useSelector(state => state.product.productData)
