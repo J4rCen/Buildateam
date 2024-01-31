@@ -4,11 +4,8 @@ import App from './App.tsx'
 import createStore from './store/store.ts'
 import { Provider } from 'react-redux'
 
-console.log(window)
-
-const data = window.__PRELOADED_STATE__
+const data= window.__PRELOADED_STATE__
 delete window.__PRELOADED_STATE__
-
 
 const store = createStore(data)
 

@@ -12,6 +12,8 @@ export const initialStore: initialStoreType = {
 }
 
 const createStore = (preloadedState = initialStore) => {
+
+  console.log(preloadedState)
   return configureStore({
     preloadedState,
     reducer: {
