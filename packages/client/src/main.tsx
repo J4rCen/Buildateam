@@ -9,7 +9,8 @@ delete window.__PRELOADED_STATE__
 
 const store = createStore(data)
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.hydrateRoot(
+  document.getElementById('root') as HTMLElement,
   <React.StrictMode>
     <Provider store={store}>
       <App />

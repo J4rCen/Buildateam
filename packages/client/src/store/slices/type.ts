@@ -1,4 +1,4 @@
-export interface Product {
+export type Product = {
     id: string | null
     images: string | null
     bodyHtml: string | null        
