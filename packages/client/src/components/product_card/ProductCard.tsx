@@ -5,15 +5,19 @@ import "./ProductCard.scss"
 const ProductCard = (props: IProductCard) => {
 
     const canvasRef = useRef<HTMLCanvasElement>(null)
-
-    const image = new Image()
-    image.src = props.images
+    
+    
     
     useEffect(() => {
         const ctx = canvasRef.current?.getContext('2d')
         ctx?.clearRect(0, 0, 300, 200)
 
-        ctx?.drawImage(image, 50, 10, 200, 200)
+        const image = new Image()
+        image.src = props.images
+        image.onload = function() {
+            ctx?.drawImage(image, 30, 10, 250, 200)
+        }
+
     })
 
     return(
