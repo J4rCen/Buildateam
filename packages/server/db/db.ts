@@ -1,13 +1,25 @@
 import { Sequelize, SequelizeOptions } from "sequelize-typescript"
 import shopifyData from "./models/shopyfiData.model"
+import dotenv from "dotenv"
+import * as proces from "process"
+
+dotenv.config({path: '../../.env'})
+
+const {
+    POSTGRES_HOST,
+    POSTGRES_USER,
+    POSTGRES_PASSWORD,
+    POSTGRES_DB,
+    POSTGRES_PORT,
+} = proces.env
 
 const sequelizeOptions: SequelizeOptions = {
-    host: "localhost",
+    host: POSTGRES_HOST,
     dialect: "postgres",
-    username: "postgres",
-    password: "postgres",
-    port: 5432,
-    database: "postgres"
+    username: POSTGRES_USER,
+    password: POSTGRES_PASSWORD,
+    port: parseInt(POSTGRES_PORT),
+    database: POSTGRES_DB
 }
 
 const sequelize = new Sequelize(sequelizeOptions)

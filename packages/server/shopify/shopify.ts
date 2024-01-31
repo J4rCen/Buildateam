@@ -1,8 +1,14 @@
 import { createAdminApiClient } from "@shopify/admin-api-client"
 import query from "./query"
+import dotenv from "dotenv"
+import * as proces from "process"
 
-const URL_SHOP = 'https://cpb-new-developer.myshopify.com/admin/api/2024-01/graphql.json'
-const TOKEN = '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'
+dotenv.config({path: '../../.env'})
+
+const {
+    URL_SHOP,
+    TOKEN
+} = proces.env
 
 
 async function connectionShopify() {

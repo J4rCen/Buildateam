@@ -10,19 +10,19 @@ const ProductCard = (props: IProductCard) => {
     
     useEffect(() => {
         const ctx = canvasRef.current?.getContext('2d')
-        ctx?.clearRect(0, 0, 300, 200)
+        ctx?.clearRect(0, 0, 200, 200)
 
         const image = new Image()
         image.src = props.images
         image.onload = function() {
-            ctx?.drawImage(image, 30, 10, 250, 200)
+            ctx?.drawImage(image, 30, 10, 200, 200)
         }
 
     })
 
     return(
         <div className="div_productCard">
-            <canvas ref={canvasRef} width={300} height={200} />
+            <canvas ref={canvasRef} width={300} height={250} />
             <div className="div_info_product" dangerouslySetInnerHTML={{ __html: props.bodyHtml}} />
         </div>
     )

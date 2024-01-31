@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "client:dev": "lerna run dev --scope=client",
-    "client:build": "lerna run build --scope=client"
+    "client:build": "lerna run build --scope=client",
+    "server:start": "lerna run start --scope=server"
   },
   "keywords": [],
   "workspaces": [
