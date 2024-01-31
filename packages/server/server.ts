@@ -9,6 +9,10 @@ import { ViteDevServer } from "vite";
 import * as process from 'process'
 
 async function startServer() {
+
+  await connectDB()
+  await dataRecording(await connectionShopify())
+
   const isDev = () => process.env.NODE_ENV === 'development'
   const isProduction = () => !isDev()
 
@@ -41,7 +45,7 @@ async function startServer() {
 
   server.use(express.static(path.join(distPath, 'assets')))
 
-  server.use('*', async (req, res) => {
+  server.get('*', async (req, res) => {
     try {
       const url = req.originalUrl
       let template: string
@@ -49,6 +53,12 @@ async function startServer() {
         store: unknown,
         ssrManifest?: string
       ) => Promise<string>
+
+      const initialState = []
+      const data = await shopifyDBControllers.getData()
+      data.map(el => {
+        initialState.push(el.dataValues.data)
+      })
 
       if(isProduction()) {
         template = await fs.readFile(path.join(distPath, 'index.html'), 'utf-8')
@@ -67,13 +77,22 @@ async function startServer() {
         )).render
       }
 
-      const rendered = await render(ssrManifest)
-      const html = template.replace('<!--ssr-outlet-->', rendered).replace('<!--ssr-data-->', 'hello')
+      const rendered = await render(initialState, ssrManifest)
+
+      const ssrData = `<script>window.__PRELOADED_STATE__={product: {productData: ${JSON.stringify(
+        initialState
+      )}}}</script>`
+
+      const html = template.replace('<!--ssr-outlet-->', rendered).replace('<!--ssr-data-->', ssrData)
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (error) {
       console.error(error)
     }
+  })
+
+  server.listen(PORT, () => {
+    console.log(`Server runing ${PORT}`)
   })
 
 }

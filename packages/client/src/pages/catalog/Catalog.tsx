@@ -11,9 +11,8 @@ const Catalog = () => {
 
     const product: Array<React.ReactNode> = []
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
+    // @ts-ignore
     const data = useSelector(state => state.product.productData)
-    console.log(data)
     data.map((data: ICatalog) => {
         product.push(<ProductCard key={data.id} images={data.images} bodyHtml={data.bodyHtml}/>)
     })
