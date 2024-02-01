@@ -5,7 +5,9 @@
   "scripts": {
     "client:dev": "lerna run dev --scope=client",
     "client:build": "lerna run build --scope=client",
-    "server:start": "lerna run start --scope=server"
+    "server:start": "lerna run start --scope=server",
+    "start": "docker-compose up -d && lerna run build --scope=client && lerna run start --scope=server",
+    "stop": "docker-compose stop"
   },
   "keywords": [],
   "workspaces": [

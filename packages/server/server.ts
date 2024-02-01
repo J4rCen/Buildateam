@@ -26,6 +26,7 @@ async function startServer() {
 
   const server = express()
   const PORT = 3001
+
   const initialState = {
     product: {
       productData: []
@@ -50,7 +51,7 @@ async function startServer() {
 
   server.use(express.static(path.join(distPath, 'assets')))
 
-  server.get('*', async (req, res) => {
+  server.get('/', async (req, res) => {
     try {
       const url = req.originalUrl
       let template: string
@@ -58,7 +59,6 @@ async function startServer() {
         store: unknown,
         ssrManifest?: string
       ) => Promise<string>
-
      
       if(initialState.product.productData.length === 0) {
         const data = await shopifyDBControllers.getData()
@@ -66,8 +66,6 @@ async function startServer() {
           initialState.product.productData.push(el.data)
         }) 
       }
-
-      
 
       if(isProduction()) {
         template = await fs.readFile(path.join(distPath, 'index.html'), 'utf-8')

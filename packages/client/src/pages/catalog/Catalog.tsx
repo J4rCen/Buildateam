@@ -8,19 +8,18 @@ export interface ICatalog extends IProductCard{
 }
 
 const Catalog = () => {
-
-    const product: Array<React.ReactNode> = []
     
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const data = useSelector(state => state.product.productData)
-    data.map((data: ICatalog) => {
-        product.push(<ProductCard key={data.id} images={data.images} bodyHtml={data.bodyHtml}/>)
-    })
-
+    
     return(
         <div className="catalog_div_grid">
-            {product}
+            {   
+                data.map((data: ICatalog) => {
+                   return <ProductCard key={data.id} images={data.images} bodyHtml={data.bodyHtml}/>
+                })
+            }
         </div>
     )
 }

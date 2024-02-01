@@ -11,7 +11,7 @@ describe("Page 'Catalog", () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
     let state: any
 
-    
+    afterEach(cleanup)
 
     beforeEach(() => {
         state = {
@@ -31,8 +31,6 @@ describe("Page 'Catalog", () => {
             }
         }
     })
-
-    afterEach(cleanup)
 
     it('render with an empty store', () => {
 
