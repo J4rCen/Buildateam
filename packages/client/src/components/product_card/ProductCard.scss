@@ -1,0 +1,14 @@
+.div_productCard {
+    height: 400px;
+    width: 250px;
+    border-radius: 10px;
+    background-color: antiquewhite;
+    margin: 20px;
+    overflow: hidden; /* Обрезаем всё за пределами блока */
+    text-overflow: ellipsis; /* Добавляем многоточие */
+}
+
+.div_info_product {
+    height: 200px;
+    margin: 5px;
+}

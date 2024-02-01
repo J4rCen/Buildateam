@@ -1,0 +1,25 @@
+{
+  "name": "buildateam",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "client:dev": "lerna run dev --scope=client",
+    "client:build": "lerna run build --scope=client",
+    "server:start": "lerna run start --scope=server",
+    "test": "lerna run test --scope=client",
+    "start": "docker-compose up -d && lerna run build --scope=client && lerna run start --scope=server",
+    "stop": "docker-compose stop"
+  },
+  "keywords": [],
+  "workspaces": [
+    "packages/*"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.1"
+  },
+  "devDependencies": {
+    "lerna": "^8.0.2"
+  }
+}
