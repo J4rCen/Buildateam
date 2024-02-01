@@ -6,8 +6,6 @@ const ProductCard = (props: IProductCard) => {
 
     const canvasRef = useRef<HTMLCanvasElement>(null)
     
-    
-    
     useEffect(() => {
         const ctx = canvasRef.current?.getContext('2d')
         ctx?.clearRect(0, 0, 200, 200)
